@@ -2,8 +2,9 @@ project "GLFW"
 	kind "StaticLib"
 	language "C"
 
-	targetdir ("bin/" .. output .. "/%{project_name}")
-	objdir ("bin-int/" .. output .. "/%{project_name}")
+	-- is it in right place?
+	targetdir ("bin/" .. outputdir .. "/%{project_name}")
+	objdir ("bin-int/" .. outputdir .. "/%{project_name}")
 
 	files
 	{
@@ -40,5 +41,5 @@ project "GLFW"
 			"_GLFW_WIN32",
 			"_CRT_SECURE_NO_WARNINGS"
 		}
-	filter { "system:windows", "configuration:Release" }
+	filter { "system:windows", "configurations:Release" }
 		buildoptions "/MT"
