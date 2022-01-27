@@ -2,7 +2,6 @@ project "GLFW"
 	kind "StaticLib"
 	language "C"
 
-	-- is it in right place?
 	targetdir ("bin/" .. outputdir .. "/%{project_name}")
 	objdir ("bin-int/" .. outputdir .. "/%{project_name}")
 
@@ -10,16 +9,23 @@ project "GLFW"
 	{
 		"include/GLFW/glfw3.h",
 		"include/GLFW/glfw3native.h",
-		"src/glfw_config.h",
+		"src/context.c",
 		"src/init.c",
 		"src/input.c",
+--		"src/internal.h",
 		"src/monitor.c",
 		"src/vulkan.c",
-		"src/window.c"
+		"src/window.c",
+		"src/platform.c",
+		"src/null_init.c",
+		"src/null_joystick.c",
+		"src/null_monitor.c",
+		"src/null_window.c",
+
 	}
 
 	filter "system:windows"
-		buildoptions { "-std=c11", "-lgdi32" }
+		buildoptions { "/std:c11", "/gdi32" }
 		systemversion "latest"
 		staticruntime "On"
 
@@ -31,6 +37,7 @@ project "GLFW"
 			"src/win32_time.c",
 			"src/win32_thread.c",
 			"src/win32_window.c",
+			"src/win32_module.c",
 			"src/wgl_context.c",
 			"src/egl_context.c",
 			"src/osmesa_context.c"
