@@ -12,7 +12,6 @@ project "GLFW"
 		"src/context.c",
 		"src/init.c",
 		"src/input.c",
---		"src/internal.h",
 		"src/monitor.c",
 		"src/vulkan.c",
 		"src/window.c",
@@ -23,9 +22,20 @@ project "GLFW"
 		"src/null_window.c",
 
 	}
+	
+	filter "configurations:Debug"
+		buildoptions "/MDd"
+		symbols "On"
+
+	filter "configurations:Release"
+		buildoptions "/MD"
+		optimize "On"
+
+	filter "configurations:Dist"
+		buildoptions "/MD"
+		optimize "On"
 
 	filter "system:windows"
-		buildoptions { "/std:c11", "/gdi32" }
 		systemversion "latest"
 		staticruntime "On"
 
@@ -48,5 +58,3 @@ project "GLFW"
 			"_GLFW_WIN32",
 			"_CRT_SECURE_NO_WARNINGS"
 		}
-	filter { "system:windows", "configurations:Release" }
-		buildoptions "/MT"
