@@ -1,6 +1,7 @@
 project "GLFW"
 	kind "StaticLib"
 	language "C"
+	staticruntime "on"
 
 	targetdir ("bin/" .. outputdir .. "/%{project_name}")
 	objdir ("bin-int/" .. outputdir .. "/%{project_name}")
@@ -24,20 +25,15 @@ project "GLFW"
 	}
 	
 	filter "configurations:Debug"
-		buildoptions "/MDd"
+		runtime "Debug"
 		symbols "On"
 
 	filter "configurations:Release"
-		buildoptions "/MD"
-		optimize "On"
-
-	filter "configurations:Dist"
-		buildoptions "/MD"
+		runtime "Release"
 		optimize "On"
 
 	filter "system:windows"
 		systemversion "latest"
-		staticruntime "On"
 
 		files
 		{
